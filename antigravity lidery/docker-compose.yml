@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  lidery-app:
+    build: .
+    container_name: lidery-media-system
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - DATABASE_PATH=/app/data/lidery.db
+    volumes:
+      - lidery-data:/app/data
+      - lidery-backups:/app/backups
+
+volumes:
+  lidery-data:
+    driver: local
+  lidery-backups:
+    driver: local
